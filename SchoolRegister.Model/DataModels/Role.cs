@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.ComponentModel;
 namespace SchoolRegister.Models.DataModels;
 
 public class Role : IdentityRole<int>

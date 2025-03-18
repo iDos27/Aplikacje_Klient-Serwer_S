@@ -1,5 +1,4 @@
 namespace SchoolRegister.Models.DataModels;
-
 public enum GradeScale
 {
     NDST = 2,

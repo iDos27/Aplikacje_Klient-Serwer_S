@@ -1,6 +1,9 @@
-namespace SchoolRegister.Models.DataModels;
-
-public enum RoleValue
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography.X509Certificates;
+namespace SchoolRegister.Model.DataModels;
+public enum RoleValue : int
 {
     User = 0,
     Student = 1,

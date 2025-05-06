@@ -17,7 +17,7 @@ namespace SchoolRegister.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.14")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -219,7 +219,7 @@ namespace SchoolRegister.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeacherId")
+                    b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -440,7 +440,8 @@ namespace SchoolRegister.DAL.Migrations
                     b.HasOne("SchoolRegister.Model.DataModels.Teacher", "Teacher")
                         .WithMany("Subjects")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Teacher");
                 });

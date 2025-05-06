@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SchoolRegister.ViewModels.VM;
+
+
 namespace SchoolRegister.Web.Controllers;
 
 public class HomeController : Controller

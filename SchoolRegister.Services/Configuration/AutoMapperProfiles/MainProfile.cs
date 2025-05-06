@@ -1,39 +1,47 @@
 using AutoMapper;
 using SchoolRegister.Model.DataModels;
 using SchoolRegister.ViewModels.VM;
-
-namespace SchoolRegister.Services.Configuration.AutoMapperProfiles
+namespace SchoolRegister.Services.Configuration.AutoMapperProfiles;
+public class MainProfile : Profile
 {
-    public class MainProfile : Profile
+    public MainProfile()
     {
-        public MainProfile()
-        {
-            // AutoMapper maps
-            CreateMap<Subject, SubjectVm>()
-                // custom mapping: FirstName and LastName concat string to TeacherName
-                .ForMember(dest => dest.TeacherName, x => x.MapFrom(src => src.Teacher == null
-                    ? null
-                    : $"{src.Teacher.FirstName} {src.Teacher.LastName}"))
-                // custom mapping: IList<Group> to IList<GroupVm>
-                .ForMember(dest => dest.Groups, x => x.MapFrom(src => src.SubjectGroups.Select(y => y.Group)));
+        //AutoMapper maps
+        CreateMap<Subject, SubjectVm>() // map from Subject(src) to SubjectVm(dst)
+        // custom mapping: FirstName and LastName concat string to TeacherName
+        .ForMember(dest => dest.TeacherName, x => x.MapFrom(src => src.Teacher == null ?
+        null :
+        $"{src.Teacher.FirstName} {src.Teacher.LastName}"))
+        // custom mapping: IList<Group> to IList<GroupVm>
+        .ForMember(dest => dest.Groups, x => x.MapFrom(src => src.SubjectGroups.Select(y => y.Group)));
+        CreateMap<AddOrUpdateSubjectVm, Subject>();
+        CreateMap<Group, GroupVm>()
+        .ForMember(dest => dest.Students, x => x.MapFrom(src => src.Students))
+        .ForMember(dest => dest.Subjects, x => x.MapFrom(src => src.SubjectGroups.Select(s => s.Subject)));
+        CreateMap<SubjectVm, AddOrUpdateSubjectVm>();
+        CreateMap<Student, StudentVm>()
+        .ForMember(dest => dest.GroupName, x => x.MapFrom(src => src.Group == null ? null : src.Group.Name))
+        .ForMember(dest => dest.ParentName,
+        x => x.MapFrom(src => src.Parent == null ? null : $"{src.Parent.FirstName} {src.Parent.LastName}"));
+        //....... other maps.........
+        CreateMap<Teacher, TeacherVm>();
+        CreateMap<Group, GroupVm>();
 
-            CreateMap<AddOrUpdateSubjectVm, Subject>();
+        CreateMap<AddGradeToStudentVm, Grade>();
+        CreateMap<Grade, GradeVm>();
+        CreateMap<Grade, GradeVm>();
+        CreateMap<GetGradesReportVm, GradesReportVm>();
 
-            CreateMap<Group, GroupVm>()
-                .ForMember(dest => dest.Students, x => x.MapFrom(src => src.Students))
-                .ForMember(dest => dest.Subjects, x => x.MapFrom(src => src.SubjectGroups.Select(s => s.Subject)));
+        CreateMap<Group, GroupVm>();
+        CreateMap<AddOrUpdateGroupVm, Group>();
+        CreateMap<Student, StudentVm>();
+        CreateMap<Subject, SubjectVm>();
 
-            CreateMap<SubjectVm, AddOrUpdateSubjectVm>();
+        CreateMap<Student, StudentVm>();
 
-            CreateMap<Student, StudentVm>()
-                .ForMember(dest => dest.GroupName, x => x.MapFrom(src => src.Group == null 
-                    ? null 
-                    : src.Group.Name))
-                .ForMember(dest => dest.ParentName, x => x.MapFrom(src => src.Parent == null 
-                    ? null 
-                    : $"{src.Parent.FirstName} {src.Parent.LastName}"));
+        CreateMap<AttachDetachSubjectGroupVm, SubjectGroup>()
+        .ForMember(dest => dest.SubjectId, opt => opt.MapFrom(src => src.SubjectId))
+        .ForMember(dest => dest.GroupId, opt => opt.MapFrom(src => src.GroupId));
 
-            // ... other maps ...
-        }
     }
 }

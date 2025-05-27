@@ -17,12 +17,12 @@ builder.Services.AddDefaultIdentity<User> (options => options.SignIn.RequireConf
     .AddUserManager<UserManager<User>> ()
     .AddEntityFrameworkStores<ApplicationDbContext> ();
 builder.Services.AddTransient (typeof (ILogger), typeof (Logger<Program>));
-builder.Services.AddScoped<IStringLocalizer, StringLocalizer<BaseController>> ();
-builder.Services.AddScoped<ISubjectService, SubjectService> ();
-builder.Services.AddScoped<IGradeService, GradeService> ();
-builder.Services.AddScoped<IGroupService, GroupService> ();
-builder.Services.AddScoped<IStudentService, StudentService> ();
-builder.Services.AddScoped<ITeacherService, TeacherService> ();
+//builder.Services.AddScoped<IStringLocalizer, StringLocalizer<BaseController>> ();
+//builder.Services.AddScoped<ISubjectService, SubjectService> ();
+//builder.Services.AddScoped<IGradeService, GradeService> ();
+//builder.Services.AddScoped<IGroupService, GroupService> ();
+//builder.Services.AddScoped<IStudentService, StudentService> ();
+//builder.Services.AddScoped<ITeacherService, TeacherService> ();
 
 
 var app = builder.Build();
